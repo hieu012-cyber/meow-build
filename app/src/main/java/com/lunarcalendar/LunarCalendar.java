@@ -37,7 +37,7 @@ public class LunarCalendar {
     // Dương -> Âm
     public static LunarDate solarToLunar(int y,int m,int d){
         long offset=(dateToDays(y,m,d)-dateToDays(1900,1,31));
-        int lunarYear=1900; int days;
+        int lunarYear=1900; int days=29;
         while(lunarYear<2101 && offset>0){
             days=yearDays(lunarYear); offset-=days; lunarYear++;
         }
