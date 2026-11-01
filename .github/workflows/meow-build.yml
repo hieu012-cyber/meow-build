@@ -1,0 +1,20 @@
+name: meow-build
+on:
+  push:
+    branches: [ meow-build ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build
+        run: echo 'Không tìm thấy pom.xml hay build.gradle' && exit 1
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: plugin
+          path: build/libs/*.jar
