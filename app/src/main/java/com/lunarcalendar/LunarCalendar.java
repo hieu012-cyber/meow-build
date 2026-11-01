@@ -67,7 +67,26 @@ public class LunarCalendar {
     // Can Chi
     private static final String[] CAN={"Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"};
     private static final String[] CHI={"Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"};
+
+    // Chuẩn hoá modulo cho số âm
+    private static int mod(int a,int b){return ((a%b)+b)%b;}
+
     public static String getCanChiYear(int lunarYear){
-        return CAN[(lunarYear-4)%10]+" "+CHI[(lunarYear-4)%12];
+        return CAN[mod(lunarYear-4,10)]+" "+CHI[mod(lunarYear-4,12)];
+    }
+
+    // Can Chi của tháng âm lịch (tháng 1 = Dần)
+    public static String getCanChiMonth(int lunarYear,int lunarMonth){
+        int chiIndex=mod(lunarMonth+1,12); // tháng 1 -> Dần (index 2)
+        int canIndex=mod((lunarYear-4)*12+(lunarMonth-1)+2,10);
+        return CAN[canIndex]+" "+CHI[chiIndex];
+    }
+
+    // Can Chi của ngày dương lịch (dựa trên số ngày Julius)
+    public static String getCanChiDay(int y,int m,int d){
+        long jd=dateToDays(y,m,d)+1721426L; // chuyển sang số ngày Julius
+        int canIndex=mod((int)(jd+9),10);
+        int chiIndex=mod((int)(jd+1),12);
+        return CAN[canIndex]+" "+CHI[chiIndex];
     }
 }

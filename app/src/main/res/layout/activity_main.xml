@@ -3,20 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/bg"
+    android:padding="12dp">
 
-    <!-- Header với nút điều hướng tháng -->
+    <!-- Header điều hướng tháng -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:paddingBottom="16dp">
+        android:paddingBottom="12dp">
 
         <Button
-            android:id="@+id/btnPreviousMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btnPrev"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="0dp"
+            android:background="@color/primary"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:text="&lt;" />
 
         <TextView
@@ -26,85 +31,48 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Tháng 1, 2024"
+            android:textColor="@color/primary_dark"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btnNextMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btnNext"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="0dp"
+            android:background="@color/primary"
+            android:textColor="@color/white"
+            android:textSize="18sp"
             android:text="&gt;" />
 
     </LinearLayout>
 
-    <!-- Tiêu đề các ngày trong tuần -->
+    <!-- Tiêu đề thứ trong tuần -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="8dp">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
+        <TextView style="@style/DayOfWeekHeader"
             android:text="CN"
-            android:textColor="@color/red"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="T2"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="T3"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="T4"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="T5"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="T6"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="T7"
-            android:textColor="@color/blue"
-            android:textStyle="bold" />
+            android:textColor="@color/red" />
+        <TextView style="@style/DayOfWeekHeader"
+            android:text="T2" />
+        <TextView style="@style/DayOfWeekHeader"
+            android:text="T3" />
+        <TextView style="@style/DayOfWeekHeader"
+            android:text="T4" />
+        <TextView style="@style/DayOfWeekHeader"
+            android:text="T5" />
+        <TextView style="@style/DayOfWeekHeader"
+            android:text="T6" />
+        <TextView style="@style/DayOfWeekHeader"
+            android:text="T7" />
 
     </LinearLayout>
 
-    <!-- GridView hiển thị các ngày -->
+    <!-- Lưới lịch -->
     <GridView
         android:id="@+id/gridCalendar"
         android:layout_width="match_parent"
@@ -112,33 +80,53 @@
         android:layout_weight="1"
         android:numColumns="7"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="8dp"
-        android:horizontalSpacing="4dp" />
+        android:verticalSpacing="4dp"
+        android:horizontalSpacing="2dp" />
+
+    <Button
+        android:id="@+id/btnToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/primary"
+        android:textColor="@color/white"
+        android:text="@string/today" />
 
     <!-- Thông tin ngày được chọn -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@color/light_gray"
-        android:layout_marginTop="16dp">
+        android:padding="14dp"
+        android:background="@color/white"
+        android:layout_marginTop="8dp">
 
         <TextView
             android:id="@+id/tvSelectedDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Hôm nay"
-            android:textSize="18sp"
+            android:textColor="@color/primary_dark"
+            android:textSize="17sp"
             android:textStyle="bold"
-            android:paddingBottom="8dp" />
+            android:paddingBottom="6dp" />
 
         <TextView
             android:id="@+id/tvLunarDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Âm lịch: "
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvCanChi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="Can Chi: "
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
