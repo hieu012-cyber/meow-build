@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_calc"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/tab_calc" />
+    <item
+        android:id="@+id/nav_clock"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="@string/tab_clock" />
+    <item
+        android:id="@+id/nav_weather"
+        android:icon="@android:drawable/ic_menu_compass"
+        android:title="@string/tab_weather" />
+</menu>
