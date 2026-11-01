@@ -4,9 +4,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:label="Lịch Âm Dương"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@android:style/Theme.Material.Light.DarkActionBar">
         <activity
             android:name=".MainActivity"
             android:exported="true">
