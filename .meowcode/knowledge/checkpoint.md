@@ -2,7 +2,7 @@
 - Task: build apk đi
 - Status: doing
 - Done:
-  - Đã thực hiện 65 bước thao tác
+  - Đã thực hiện 73 bước thao tác
 - Next: Tiếp tục hoàn thiện mã nguồn
 - Files:
   - .meowcode/build_config.json
@@ -22,5 +22,5 @@
   - src/app/src/main/res/values/strings.xml
   - src/app/src/main/java/com/meowcode/cocaro/MenuActivity.java
 - Decisions: Không
-- Blockers: build_apk tại : [LỖI build_apk] ❌ Build thất bại! (2 lần)
+- Blockers: build_apk tại : [LỖI build_apk] ❌ Build thất bại! (3 lần)
 - Domain: android-app
