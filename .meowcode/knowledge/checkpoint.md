@@ -1,0 +1,17 @@
+### Checkpoint
+- Task: làm 1 app chơi cờ
+- Status: doing
+- Done:
+  - Đã thực hiện 13 bước thao tác
+- Next: Tiếp tục hoàn thiện mã nguồn
+- Files:
+  - .meowcode/build_config.json
+  - src/main/res/values/strings.xml
+  - src/main/res/values/colors.xml
+  - src/main/res/layout/activity_main.xml
+  - src/main/java/com/meowcode/cocaro/GomokuView.java
+  - src/main/java/com/meowcode/cocaro/MainActivity.java
+  - src/main/AndroidManifest.xml
+- Decisions: Không
+- Blockers: Không
+- Domain: general

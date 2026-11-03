@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="board_background">#F5DEB3</color>
+    <color name="board_line">#8B4513</color>
+    <color name="stone_black">#1A1A1A</color>
+    <color name="stone_white">#FFFFFF</color>
+    <color name="status_text">#333333</color>
+</resources>

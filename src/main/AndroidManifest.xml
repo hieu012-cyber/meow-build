@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lunarcalendar">
+    package="com.meowcode.cocaro">
+
+    <!-- App chạy hoàn toàn offline, không cần quyền nào -->
 
     <application
-        android:allowBackup="true"
-        android:label="Lịch Âm Dương"
-        android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+        android:label="@string/app_name"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -14,6 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

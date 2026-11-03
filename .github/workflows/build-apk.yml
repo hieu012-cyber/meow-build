@@ -1,0 +1,86 @@
+name: Build Android APK
+on:
+  push:
+    branches: [ '**' ]
+  workflow_dispatch:
+
+env:
+  APK_NAME: "app_choi_co"
+  VERSION_MAJOR_MINOR: "1.0"
+  VERSION_CODE_OFFSET: "0"
+  APPEND_VERSION: "true"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Tính phiên bản
+        run: |
+          VERSION_CODE=$(( VERSION_CODE_OFFSET + GITHUB_RUN_NUMBER ))
+          VERSION_NAME="${VERSION_MAJOR_MINOR}.${GITHUB_RUN_NUMBER}"
+          echo "VERSION_CODE=$VERSION_CODE" >> "$GITHUB_ENV"
+          echo "VERSION_NAME=$VERSION_NAME" >> "$GITHUB_ENV"
+          if [ "$APPEND_VERSION" = "true" ]; then
+            FINAL_NAME="${APK_NAME}-v${VERSION_NAME}"
+          else
+            FINAL_NAME="${APK_NAME}"
+          fi
+          echo "FINAL_APK_NAME=$FINAL_NAME" >> "$GITHUB_ENV"
+          echo "Phiên bản: $VERSION_NAME (versionCode: $VERSION_CODE), tên APK: $FINAL_NAME.apk"
+
+      - name: Chuẩn bị chữ ký cố định
+        run: |
+          if [ -n "${{ secrets.KEYSTORE_BASE64 }}" ]; then
+            echo "Đang giải mã keystore cố định từ GitHub Secrets..."
+            mkdir -p "$HOME/.android"
+            echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > "$HOME/.android/debug.keystore"
+            echo "HAS_KEYSTORE=true" >> "$GITHUB_ENV"
+            echo "Đã thiết lập chữ ký app cố định (~/.android/debug.keystore)."
+          else
+            echo "HAS_KEYSTORE=false" >> "$GITHUB_ENV"
+            echo "THÔNG BÁO: Chưa cấu hình KEYSTORE_BASE64 trong GitHub Secrets. Đang dùng khoá debug mặc định của máy chủ."
+          fi
+
+      - name: Build Android APK
+        run: |
+          cd src
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          if [ -f "./gradlew" ]; then
+            chmod +x gradlew
+            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon
+          else
+            gradle wrapper --gradle-version 8.7
+            chmod +x gradlew
+            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon
+          fi
+
+      - name: Đặt tên APK
+        run: |
+          APK=$(find . -path "*/build/outputs/apk/debug/*.apk" 2>/dev/null | head -n 1)
+          if [ -z "$APK" ]; then
+            APK=$(find . -path "*/build/outputs/apk/*.apk" 2>/dev/null | head -n 1)
+          fi
+          if [ -z "$APK" ]; then
+            APK=$(find . -name "*.apk" 2>/dev/null | head -n 1)
+          fi
+          if [ -z "$APK" ]; then
+            echo "LỖI: Không tìm thấy file APK nào sau khi build!"
+            exit 1
+          fi
+          echo "Tìm thấy file APK gốc tại: $APK"
+          mkdir -p dist
+          cp "$APK" "dist/${FINAL_APK_NAME}.apk"
+          echo "Đã tạo APK xuất bản: dist/${FINAL_APK_NAME}.apk"
+
+      - uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: ${{ env.FINAL_APK_NAME }}
+          path: dist/${{ env.FINAL_APK_NAME }}.apk
+          if-no-files-found: error

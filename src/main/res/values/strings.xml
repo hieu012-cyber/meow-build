@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cờ Caro Meow</string>
+    <string name="reset_game">Chơi lại</string>
+    <string name="player_x_win">Người chơi X thắng!</string>
+    <string name="player_o_win">Người chơi O thắng!</string>
+    <string name="draw_game">Hòa!</string>
+    <string name="turn_x">Lượt của: X</string>
+    <string name="turn_o">Lượt của: O</string>
+</resources>
