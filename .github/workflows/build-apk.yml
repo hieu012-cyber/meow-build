@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  APK_NAME: "app_choi_co"
+  APK_NAME: "CoCaro-Meow"
   VERSION_MAJOR_MINOR: "1.0"
   VERSION_CODE_OFFSET: "0"
   APPEND_VERSION: "true"
@@ -49,7 +49,6 @@ jobs:
 
       - name: Build Android APK
         run: |
-          cd src
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           if [ -f "./gradlew" ]; then
             chmod +x gradlew

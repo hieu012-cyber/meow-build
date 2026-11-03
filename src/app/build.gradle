@@ -1,0 +1,37 @@
+// Cấu hình module app - Cờ Caro Meow
+plugins {
+    id 'com.android.application'
+}
+
+// Nhận versionCode/versionName từ workflow qua -P (nếu không có thì dùng mặc định)
+def buildVersionCode = (project.hasProperty('versionCode') ? project.property('versionCode') : "1").toInteger()
+def buildVersionName = project.hasProperty('versionName') ? "${project.property('versionName')}" : "1.0"
+
+android {
+    namespace 'com.meowcode.cocaro'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.meowcode.cocaro"
+        minSdk 21
+        targetSdk 34
+        versionCode buildVersionCode
+        versionName buildVersionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+}

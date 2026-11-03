@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.meowcode.cocaro">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- App chạy hoàn toàn offline, không cần quyền nào -->
 
     <application
         android:label="@string/app_name"
         android:icon="@android:drawable/ic_menu_myplaces"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity
             android:name=".MainActivity"

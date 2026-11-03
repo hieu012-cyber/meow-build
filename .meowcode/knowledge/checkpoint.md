@@ -1,9 +1,9 @@
 ### Checkpoint
-- Task: làm 1 app chơi cờ
+- Task: build apk đi
 - Status: doing
 - Done:
-  - Đã thực hiện 13 bước thao tác
-- Next: Tiếp tục hoàn thiện mã nguồn
+  - Đã xử lý 41 bước
+- Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - .meowcode/build_config.json
   - src/main/res/values/strings.xml
@@ -12,6 +12,11 @@
   - src/main/java/com/meowcode/cocaro/GomokuView.java
   - src/main/java/com/meowcode/cocaro/MainActivity.java
   - src/main/AndroidManifest.xml
-- Decisions: Không
+  - settings.gradle
+  - build.gradle
+  - src/app/build.gradle
+  - src/gradle.properties
+  - src/app/src/main/AndroidManifest.xml
+- Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
 - Blockers: Không
-- Domain: general
+- Domain: android-app
