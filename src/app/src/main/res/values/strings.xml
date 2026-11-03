@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cờ Caro Meow</string>
+    <string name="menu_subtitle">5 quân thẳng hàng để chiến thắng</string>
+    <string name="play_now">Chơi ngay</string>
+    <string name="exit_game">Thoát</string>
     <string name="reset_game">Chơi lại</string>
     <string name="player_x_win">Người chơi X thắng!</string>
     <string name="player_o_win">Người chơi O thắng!</string>

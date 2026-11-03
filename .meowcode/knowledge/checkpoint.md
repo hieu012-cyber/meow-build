@@ -2,8 +2,8 @@
 - Task: build apk đi
 - Status: doing
 - Done:
-  - Đã xử lý 41 bước
-- Next: Rút gọn bộ nhớ và thực hiện tiếp
+  - Đã thực hiện 65 bước thao tác
+- Next: Tiếp tục hoàn thiện mã nguồn
 - Files:
   - .meowcode/build_config.json
   - src/main/res/values/strings.xml
@@ -17,6 +17,10 @@
   - src/app/build.gradle
   - src/gradle.properties
   - src/app/src/main/AndroidManifest.xml
-- Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
-- Blockers: Không
+  - check.js
+  - src/app/src/main/res/layout/activity_menu.xml
+  - src/app/src/main/res/values/strings.xml
+  - src/app/src/main/java/com/meowcode/cocaro/MenuActivity.java
+- Decisions: Không
+- Blockers: build_apk tại : [LỖI build_apk] ❌ Build thất bại! (2 lần)
 - Domain: android-app

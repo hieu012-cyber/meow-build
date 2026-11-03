@@ -8,13 +8,20 @@
         android:icon="@android:drawable/ic_menu_myplaces"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <!-- Màn hình menu chính (launcher) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".MenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- Màn hình chơi cờ -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
         </activity>
 
     </application>
