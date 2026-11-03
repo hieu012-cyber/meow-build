@@ -36,7 +36,7 @@ public class LunarCalendar {
     }
     // Dương -> Âm
     public static LunarDate solarToLunar(int y,int m,int d){
-        long offset=(dateToDays(y,m,d)-dateToDays(1900,1,31));
+        long offset=(dateToDays(y,m,d)-dateToDays(1900,1,31))-1; // hiệu chỉnh để khớp ngày mùng 1 Tết thực tế
         int lunarYear=1900; int days=29;
         while(lunarYear<2101 && offset>0){
             days=yearDays(lunarYear); offset-=days; lunarYear++;
@@ -84,7 +84,7 @@ public class LunarCalendar {
 
     // Can Chi của ngày dương lịch (dựa trên số ngày Julius)
     public static String getCanChiDay(int y,int m,int d){
-        long jd=dateToDays(y,m,d)+1721426L; // chuyển sang số ngày Julius
+        long jd=dateToDays(y,m,d)+1721120L; // hiệu chỉnh về mốc JDN chuẩn
         int canIndex=mod((int)(jd+9),10);
         int chiIndex=mod((int)(jd+1),12);
         return CAN[canIndex]+" "+CHI[chiIndex];
