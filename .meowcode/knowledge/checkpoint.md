@@ -2,7 +2,7 @@
 - Task: bạn gửi cái này là sao?
 - Status: doing
 - Done:
-  - Đã xử lý 13 bước
+  - Đã xử lý 17 bước
 - Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - .meowcode/build_config.json
