@@ -1,0 +1,3 @@
+# Kiểm toán cấu hình build - đã tạo proguard-rules.pro
+
+Kiểm tra toàn bộ cấu hình build: build.gradle (root, AGP 8.5.2), settings.gradle, gradle.properties, app/build.gradle (compileSdk 34, minSdk 21, appcompat 1.7.0, Java 17). Phát hiện build.gradle tham chiếu proguard-rules.pro nhưng file KHÔNG tồn tại -> đã tạo src/app/proguard-rules.pro với rule -keep com.meowcode.cocaro.**. Lưu ý manifest dùng theme @style/Theme.AppCompat.Light.NoActionBar (cần appcompat - đã có dependency). diagnose_code OK. Còn thiếu: gradle-wrapper? (GitHub Actions workflow có thể tự setup). Chưa build thử.

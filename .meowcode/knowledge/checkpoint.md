@@ -1,8 +1,8 @@
 ### Checkpoint
-- Task: build apk đi
+- Task: bạn đang gặp vấn đề gì hãy nói cho tôi h
 - Status: doing
 - Done:
-  - Đã thực hiện 73 bước thao tác
+  - Đã thực hiện 9 bước thao tác
 - Next: Tiếp tục hoàn thiện mã nguồn
 - Files:
   - .meowcode/build_config.json
@@ -21,6 +21,7 @@
   - src/app/src/main/res/layout/activity_menu.xml
   - src/app/src/main/res/values/strings.xml
   - src/app/src/main/java/com/meowcode/cocaro/MenuActivity.java
+  - src/app/proguard-rules.pro
 - Decisions: Không
-- Blockers: build_apk tại : [LỖI build_apk] ❌ Build thất bại! (3 lần)
+- Blockers: Không
 - Domain: android-app
