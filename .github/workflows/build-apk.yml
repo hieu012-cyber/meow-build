@@ -13,12 +13,59 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Kiểm tra trước khi build (Preflight)
+        run: |
+          echo "=== PREFLIGHT CHECK (BUILD_AUDIT_UI 1.2 & 1.4) ==="
+          java -version 2>&1
+          echo "ANDROID_HOME=${ANDROID_HOME}"
+          MISSING=0
+          if [ ! -f "settings.gradle" ] && [ ! -f "settings.gradle.kts" ]; then
+            echo "::error::Thiếu settings.gradle hoặc settings.gradle.kts tại thư mục chạy Gradle"
+            MISSING=1
+          fi
+          if [ ! -f "build.gradle" ] && [ ! -f "build.gradle.kts" ]; then
+            echo "::error::Thiếu build.gradle hoặc build.gradle.kts gốc"
+            MISSING=1
+          fi
+          if [ ! -f "gradle.properties" ]; then
+            echo "android.useAndroidX=true" > gradle.properties
+            echo "Đã tự bổ sung gradle.properties (android.useAndroidX=true)"
+          elif ! grep -q "android.useAndroidX=true" gradle.properties; then
+            echo "" >> gradle.properties
+            echo "android.useAndroidX=true" >> gradle.properties
+            echo "Đã bổ sung android.useAndroidX=true vào gradle.properties"
+          fi
+          if [ ! -f "app/build.gradle" ] && [ ! -f "app/build.gradle.kts" ]; then
+            echo "::error::Thiếu module app/build.gradle hoặc app/build.gradle.kts"
+            MISSING=1
+          fi
+          if [ ! -f "app/src/main/AndroidManifest.xml" ] && [ ! -f "AndroidManifest.xml" ]; then
+            echo "::error::Thiếu app/src/main/AndroidManifest.xml"
+            MISSING=1
+          fi
+          if [ ! -f "./gradlew" ]; then
+            echo "Chưa có gradlew, đang tạo Gradle Wrapper 8.7..."
+            gradle wrapper --gradle-version 8.7
+          fi
+          chmod +x gradlew
+          ./gradlew --version | head -n 15
+          if [ "$MISSING" -ne 0 ]; then
+            echo "::error::Preflight thất bại: Thiếu các file cấu hình bắt buộc ở trên."
+            exit 1
+          fi
 
       - name: Tính phiên bản
         run: |
@@ -49,26 +96,29 @@ jobs:
 
       - name: Build Android APK
         run: |
+          set -o pipefail
           echo "sdk.dir=$ANDROID_HOME" > local.properties
-          set +e
-          if [ -f "./gradlew" ]; then
-            chmod +x gradlew
-            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon > build_log.txt 2>&1
-          else
-            gradle wrapper --gradle-version 8.7
-            chmod +x gradlew
-            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon > build_log.txt 2>&1
+          chmod +x gradlew
+          ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon --stacktrace 2>&1 | tee build.log
+
+      - name: Đưa lỗi thật lên annotation
+        if: failure()
+        run: |
+          if [ -f "build.log" ]; then
+            if grep -q "What went wrong" build.log; then
+              grep -A 12 "What went wrong" build.log | head -n 30 | sed 's/^/::error::/'
+            else
+              tail -n 30 build.log | sed 's/^/::error::/'
+            fi
           fi
-          EXIT_CODE=$?
-          set -e
-          cat build_log.txt
-          if [ "$EXIT_CODE" -ne 0 ]; then
-            # Trích khối lỗi 'What went wrong' và phát thành annotation
-            # để chẩn đoán lỗi build từ xa qua GitHub API
-            ERROR_SNIPPET=$(sed -n '/What went wrong/,/^\* Try:/p' build_log.txt | tr '\n' '|' | cut -c1-400)
-            echo "::error::BUILD FAILED (exit $EXIT_CODE): $ERROR_SNIPPET"
-            exit $EXIT_CODE
-          fi
+
+      - name: Lưu log lỗi
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: src/build.log
+          if-no-files-found: ignore
 
       - name: Đặt tên APK
         run: |
@@ -92,5 +142,5 @@ jobs:
         if: success()
         with:
           name: ${{ env.FINAL_APK_NAME }}
-          path: dist/${{ env.FINAL_APK_NAME }}.apk
+          path: src/dist/${{ env.FINAL_APK_NAME }}.apk
           if-no-files-found: error
