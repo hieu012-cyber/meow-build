@@ -1,3 +1,3 @@
 # Architecture
-- Domain: Đa mục đích
+- Domain: Android APK
 - Stack: Vanilla / Độc lập

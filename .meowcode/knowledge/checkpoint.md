@@ -1,30 +1,33 @@
 ### Checkpoint
-- Task: bạn gửi cái này là sao?
+- Task: làm tiếp đi
 - Status: doing
 - Done:
-  - Đã xử lý 17 bước
-- Next: Rút gọn bộ nhớ và thực hiện tiếp
+  - Đã thực hiện 22 bước thao tác
+- Next: Tiếp tục hoàn thiện mã nguồn
 - Files:
-  - .meowcode/build_config.json
-  - src/main/res/values/strings.xml
-  - src/main/res/values/colors.xml
-  - src/main/res/layout/activity_main.xml
-  - src/main/java/com/meowcode/cocaro/GomokuView.java
-  - src/main/java/com/meowcode/cocaro/MainActivity.java
-  - src/main/AndroidManifest.xml
   - settings.gradle
   - build.gradle
-  - src/app/build.gradle
-  - src/gradle.properties
-  - src/app/src/main/AndroidManifest.xml
-  - check.js
-  - src/app/src/main/res/layout/activity_menu.xml
-  - src/app/src/main/res/values/strings.xml
-  - src/app/src/main/java/com/meowcode/cocaro/MenuActivity.java
-  - src/app/proguard-rules.pro
-  - src/settings.gradle
   - gradle.properties
-  - .github/workflows/build-apk.yml
-- Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
+  - app/build.gradle
+  - gradle/wrapper/gradle-wrapper.properties
+  - app/proguard-rules.pro
+  - app/src/main/AndroidManifest.xml
+  - .meowcode/build_config.json
+  - app/src/main/java/com/meowcode/lichamduong/data/LunarCalendar.kt
+  - app/src/main/res/values/colors.xml
+  - app/src/main/res/values/strings.xml
+  - app/src/main/res/values/themes.xml
+  - app/src/main/res/drawable/ic_launcher_foreground.xml
+  - app/src/main/res/mipmap/ic_launcher.xml
+  - app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+  - app/src/main/res/layout/activity_main.xml
+  - app/src/main/res/drawable/bg_header.xml
+  - app/src/main/res/drawable/bg_card.xml
+  - app/src/main/res/drawable/bg_nav_button.xml
+  - app/src/main/res/drawable/bg_today.xml
+  - app/src/main/res/drawable/ic_chevron_left.xml
+  - app/src/main/res/drawable/ic_chevron_right.xml
+  - app/src/main/res/drawable/bg_button_outline.xml
+- Decisions: Không
 - Blockers: Không
 - Domain: android-app

@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  APK_NAME: "CoCaro-Meow"
+  APK_NAME: "LichAmDuong-1.0"
   VERSION_MAJOR_MINOR: "1.0"
   VERSION_CODE_OFFSET: "0"
   APPEND_VERSION: "true"
@@ -13,9 +13,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-24.04
-    defaults:
-      run:
-        working-directory: src
     steps:
       - uses: actions/checkout@v4
 
@@ -38,9 +35,16 @@ jobs:
             mkdir -p "$SDK_DIR/licenses"
             printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$SDK_DIR/licenses/android-sdk-license" || true
             printf "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$SDK_DIR/licenses/android-sdk-preview-license" || true
+            SDKM=$(ls "$SDK_DIR"/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -n 1 || ls /usr/local/lib/android/sdk/cmdline-tools/*/bin/sdkmanager 2>/dev/null | head -n 1 || command -v sdkmanager 2>/dev/null || true)
+            if [ -n "$SDKM" ]; then
+              yes | "$SDKM" --licenses >/dev/null 2>&1 || true
+              if [ ! -d "$SDK_DIR/platforms/android-34" ] || [ ! -d "$SDK_DIR/build-tools/34.0.0" ]; then
+                "$SDKM" "platform-tools" "platforms;android-34" "build-tools;34.0.0" 2>&1 | tee -a build.log || true
+              fi
+            fi
           else
             echo "Chưa có SDK sẵn, tiến hành cài đặt gói SDK cơ bản..." | tee -a build.log
-            sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" 2>&1 | tee -a build.log
+            sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" 2>&1 | tee -a build.log || true
           fi
 
       - name: Kiểm tra trước khi build (Preflight)
@@ -75,9 +79,15 @@ jobs:
               echo "::error::Thiếu app/src/main/AndroidManifest.xml"
               MISSING=1
             fi
-            if [ ! -f "./gradlew" ]; then
-              echo "Chưa có gradlew, đang tạo Gradle Wrapper 8.7..."
-              gradle wrapper --gradle-version 8.7
+            if [ ! -f "./gradlew" ] || [ ! -f "gradle/wrapper/gradle-wrapper.jar" ]; then
+              echo "Chưa có đầy đủ Gradle Wrapper (gradlew / gradle-wrapper.jar), đang khởi tạo..."
+              if command -v gradle >/dev/null 2>&1; then
+                gradle wrapper --gradle-version 8.7
+              else
+                curl -sSL https://services.gradle.org/distributions/gradle-8.9-bin.zip -o /tmp/gradle.zip
+                unzip -q -o /tmp/gradle.zip -d /tmp
+                /tmp/gradle-8.9/bin/gradle wrapper --gradle-version 8.7
+              fi
             fi
             chmod +x gradlew
             ./gradlew --version | head -n 15
@@ -118,8 +128,23 @@ jobs:
         run: |
           set -o pipefail
           echo "sdk.dir=$ANDROID_HOME" > local.properties
+          cat << 'EOF' > meow-init.gradle
+          allprojects {
+              configurations.all {
+                  resolutionStrategy.eachDependency { details ->
+                      if (details.requested.group == 'org.jetbrains.kotlin') {
+                          if (details.requested.name == 'kotlin-stdlib-jdk7' || details.requested.name == 'kotlin-stdlib-jdk8') {
+                              if (details.requested.version?.startsWith('1.5.') || details.requested.version?.startsWith('1.6.') || details.requested.version?.startsWith('1.7.')) {
+                                  details.useVersion '1.8.22'
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+          EOF
           chmod +x gradlew
-          ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon --stacktrace 2>&1 | tee -a build.log
+          ./gradlew assembleDebug --init-script meow-init.gradle -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon --stacktrace 2>&1 | tee -a build.log
 
       - name: Đưa lỗi thật lên annotation
         if: failure()
@@ -137,7 +162,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-log
-          path: src/build.log
+          path: build.log
           if-no-files-found: ignore
 
       - name: Đặt tên APK
@@ -162,5 +187,5 @@ jobs:
         if: success()
         with:
           name: ${{ env.FINAL_APK_NAME }}
-          path: src/dist/${{ env.FINAL_APK_NAME }}.apk
+          path: dist/${{ env.FINAL_APK_NAME }}.apk
           if-no-files-found: error

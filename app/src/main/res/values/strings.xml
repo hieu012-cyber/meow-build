@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lịch Âm Dương</string>
+    <string name="today">Hôm nay</string>
+    <string name="previous_month">Tháng trước</string>
+    <string name="next_month">Tháng sau</string>
+    <string name="convert_date">Đổi ngày</string>
+    <string name="good_hours">Giờ hoàng đạo</string>
+    <string name="day_detail">Chi tiết ngày</string>
+    <string name="lunar_date">Âm lịch</string>
+    <string name="tiet_khi">Tiết khí</string>
+    <string name="can_chi_day">Can chi ngày</string>
+    <string name="can_chi_month">Can chi tháng</string>
+    <string name="can_chi_year">Can chi năm</string>
+    <string name="truc_day">Trực</string>
+    <string name="select_date_hint">Chọn một ngày trên lịch để xem chi tiết</string>
+</resources>

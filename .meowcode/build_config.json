@@ -1,7 +1,10 @@
 {
-  "appName": "Cờ Caro Meow",
-  "apkName": "CoCaro-Meow",
-  "package": "com.meowcode.cocaro",
+  "appName": "Lịch Âm Dương",
+  "apkName": "LichAmDuong-1.0.apk",
+  "versionName": "1.0",
   "versionCode": 1,
-  "versionName": "1.0"
+  "applicationId": "com.meowcode.lichamduong",
+  "minSdk": 21,
+  "targetSdk": 34,
+  "compileSdk": 34
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Bảng màu chủ đạo: đỏ son truyền thống + vàng đồng -->
+    <color name="colorPrimary">#B3221F</color>
+    <color name="colorPrimaryDark">#7E1310</color>
+    <color name="colorAccent">#F2B324</color>
+    <color name="colorGold">#E9C46A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="divider">#EFE3D8</color>
+    <color name="textHint">#B5A79E</color>
+    <color name="colorAccentDark">#B7791F</color>
+
+    <color name="bgApp">#FFF9F2</color>
+    <color name="bgCard">#FFFFFF</color>
+    <color name="bgSoft">#FDF1E3</color>
+
+    <color name="textPrimary">#241C1A</color>
+    <color name="textSecondary">#7C6F68</color>
+    <color name="textOnPrimary">#FFFFFF</color>
+
+    <color name="colorSunday">#D9342B</color>
+    <color name="colorSaturday">#2B6CB0</color>
+    <color name="colorLunar">#9A8C84</color>
+    <color name="colorTodayBg">#FDE7D8</color>
+    <color name="colorSelected">#B3221F</color>
+    <color name="colorDivider">#EFE3D8</color>
+    <color name="colorGood">#2E7D32</color>
+    <color name="colorBad">#C62828</color>
+</resources>
