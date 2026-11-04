@@ -15,3 +15,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "CoCaro"
+
+// Khai báo module app để Gradle nhận diện cấu trúc dự án
+include ':app'

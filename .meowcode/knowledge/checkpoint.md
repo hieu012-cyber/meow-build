@@ -2,7 +2,7 @@
 - Task: bạn đang gặp vấn đề gì hãy nói cho tôi h
 - Status: doing
 - Done:
-  - Đã thực hiện 9 bước thao tác
+  - Đã thực hiện 29 bước thao tác
 - Next: Tiếp tục hoàn thiện mã nguồn
 - Files:
   - .meowcode/build_config.json
@@ -22,6 +22,7 @@
   - src/app/src/main/res/values/strings.xml
   - src/app/src/main/java/com/meowcode/cocaro/MenuActivity.java
   - src/app/proguard-rules.pro
+  - src/settings.gradle
 - Decisions: Không
 - Blockers: Không
 - Domain: android-app
