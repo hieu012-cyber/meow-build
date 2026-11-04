@@ -50,13 +50,24 @@ jobs:
       - name: Build Android APK
         run: |
           echo "sdk.dir=$ANDROID_HOME" > local.properties
+          set +e
           if [ -f "./gradlew" ]; then
             chmod +x gradlew
-            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon
+            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon > build_log.txt 2>&1
           else
             gradle wrapper --gradle-version 8.7
             chmod +x gradlew
-            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon
+            ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon > build_log.txt 2>&1
+          fi
+          EXIT_CODE=$?
+          set -e
+          cat build_log.txt
+          if [ "$EXIT_CODE" -ne 0 ]; then
+            # Trích khối lỗi 'What went wrong' và phát thành annotation
+            # để chẩn đoán lỗi build từ xa qua GitHub API
+            ERROR_SNIPPET=$(sed -n '/What went wrong/,/^\* Try:/p' build_log.txt | tr '\n' '|' | cut -c1-400)
+            echo "::error::BUILD FAILED (exit $EXIT_CODE): $ERROR_SNIPPET"
+            exit $EXIT_CODE
           fi
 
       - name: Đặt tên APK

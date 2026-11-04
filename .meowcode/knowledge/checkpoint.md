@@ -2,7 +2,7 @@
 - Task: What went wrong
 - Status: doing
 - Done:
-  - Đã xử lý 0 bước
+  - Đã xử lý 13 bước
 - Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - .meowcode/build_config.json
@@ -24,6 +24,7 @@
   - src/app/proguard-rules.pro
   - src/settings.gradle
   - gradle.properties
+  - .github/workflows/build-apk.yml
 - Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
 - Blockers: Không
 - Domain: android-app
