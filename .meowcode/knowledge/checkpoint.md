@@ -1,8 +1,8 @@
 ### Checkpoint
-- Task: Dừng đoán. Làm đúng thứ tự: (1) Đọc log 
+- Task: What went wrong
 - Status: doing
 - Done:
-  - Đã xử lý 15 bước
+  - Đã xử lý 0 bước
 - Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - .meowcode/build_config.json
