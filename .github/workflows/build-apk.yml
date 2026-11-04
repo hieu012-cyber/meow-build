@@ -12,60 +12,80 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     defaults:
       run:
         working-directory: src
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
+          cache: 'gradle'
 
-      - uses: android-actions/setup-android@v3
+      - name: Kiểm tra & Chuẩn bị Android SDK
+        run: |
+          set -o pipefail
+          SDK_DIR="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          if [ -d "$SDK_DIR" ]; then
+            echo "Máy build đã có sẵn Android SDK tại: $SDK_DIR (bỏ qua bước cài đặt lại SDK)" | tee -a build.log
+            export ANDROID_HOME="$SDK_DIR"
+            export ANDROID_SDK_ROOT="$SDK_DIR"
+            echo "ANDROID_HOME=$SDK_DIR" >> "$GITHUB_ENV"
+            echo "ANDROID_SDK_ROOT=$SDK_DIR" >> "$GITHUB_ENV"
+            mkdir -p "$SDK_DIR/licenses"
+            printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "$SDK_DIR/licenses/android-sdk-license" || true
+            printf "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$SDK_DIR/licenses/android-sdk-preview-license" || true
+          else
+            echo "Chưa có SDK sẵn, tiến hành cài đặt gói SDK cơ bản..." | tee -a build.log
+            sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0" 2>&1 | tee -a build.log
+          fi
 
       - name: Kiểm tra trước khi build (Preflight)
         run: |
-          echo "=== PREFLIGHT CHECK (BUILD_AUDIT_UI 1.2 & 1.4) ==="
-          java -version 2>&1
-          echo "ANDROID_HOME=${ANDROID_HOME}"
-          MISSING=0
-          if [ ! -f "settings.gradle" ] && [ ! -f "settings.gradle.kts" ]; then
-            echo "::error::Thiếu settings.gradle hoặc settings.gradle.kts tại thư mục chạy Gradle"
-            MISSING=1
-          fi
-          if [ ! -f "build.gradle" ] && [ ! -f "build.gradle.kts" ]; then
-            echo "::error::Thiếu build.gradle hoặc build.gradle.kts gốc"
-            MISSING=1
-          fi
-          if [ ! -f "gradle.properties" ]; then
-            echo "android.useAndroidX=true" > gradle.properties
-            echo "Đã tự bổ sung gradle.properties (android.useAndroidX=true)"
-          elif ! grep -q "android.useAndroidX=true" gradle.properties; then
-            echo "" >> gradle.properties
-            echo "android.useAndroidX=true" >> gradle.properties
-            echo "Đã bổ sung android.useAndroidX=true vào gradle.properties"
-          fi
-          if [ ! -f "app/build.gradle" ] && [ ! -f "app/build.gradle.kts" ]; then
-            echo "::error::Thiếu module app/build.gradle hoặc app/build.gradle.kts"
-            MISSING=1
-          fi
-          if [ ! -f "app/src/main/AndroidManifest.xml" ] && [ ! -f "AndroidManifest.xml" ]; then
-            echo "::error::Thiếu app/src/main/AndroidManifest.xml"
-            MISSING=1
-          fi
-          if [ ! -f "./gradlew" ]; then
-            echo "Chưa có gradlew, đang tạo Gradle Wrapper 8.7..."
-            gradle wrapper --gradle-version 8.7
-          fi
-          chmod +x gradlew
-          ./gradlew --version | head -n 15
-          if [ "$MISSING" -ne 0 ]; then
-            echo "::error::Preflight thất bại: Thiếu các file cấu hình bắt buộc ở trên."
-            exit 1
-          fi
+          set -o pipefail
+          {
+            echo "=== PREFLIGHT CHECK (BUILD_AUDIT_UI 1.2 & 1.4) ==="
+            java -version 2>&1
+            echo "ANDROID_HOME=${ANDROID_HOME}"
+            MISSING=0
+            if [ ! -f "settings.gradle" ] && [ ! -f "settings.gradle.kts" ]; then
+              echo "::error::Thiếu settings.gradle hoặc settings.gradle.kts tại thư mục chạy Gradle"
+              MISSING=1
+            fi
+            if [ ! -f "build.gradle" ] && [ ! -f "build.gradle.kts" ]; then
+              echo "::error::Thiếu build.gradle hoặc build.gradle.kts gốc"
+              MISSING=1
+            fi
+            if [ ! -f "gradle.properties" ]; then
+              echo "android.useAndroidX=true" > gradle.properties
+              echo "Đã tự bổ sung gradle.properties (android.useAndroidX=true)"
+            elif ! grep -q "android.useAndroidX=true" gradle.properties; then
+              echo "" >> gradle.properties
+              echo "android.useAndroidX=true" >> gradle.properties
+              echo "Đã bổ sung android.useAndroidX=true vào gradle.properties"
+            fi
+            if [ ! -f "app/build.gradle" ] && [ ! -f "app/build.gradle.kts" ]; then
+              echo "::error::Thiếu module app/build.gradle hoặc app/build.gradle.kts"
+              MISSING=1
+            fi
+            if [ ! -f "app/src/main/AndroidManifest.xml" ] && [ ! -f "AndroidManifest.xml" ]; then
+              echo "::error::Thiếu app/src/main/AndroidManifest.xml"
+              MISSING=1
+            fi
+            if [ ! -f "./gradlew" ]; then
+              echo "Chưa có gradlew, đang tạo Gradle Wrapper 8.7..."
+              gradle wrapper --gradle-version 8.7
+            fi
+            chmod +x gradlew
+            ./gradlew --version | head -n 15
+            if [ "$MISSING" -ne 0 ]; then
+              echo "::error::Preflight thất bại: Thiếu các file cấu hình bắt buộc ở trên."
+              exit 1
+            fi
+          } 2>&1 | tee -a build.log
 
       - name: Tính phiên bản
         run: |
@@ -99,14 +119,14 @@ jobs:
           set -o pipefail
           echo "sdk.dir=$ANDROID_HOME" > local.properties
           chmod +x gradlew
-          ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon --stacktrace 2>&1 | tee build.log
+          ./gradlew assembleDebug -PversionCode=$VERSION_CODE -PversionName=$VERSION_NAME --no-daemon --stacktrace 2>&1 | tee -a build.log
 
       - name: Đưa lỗi thật lên annotation
         if: failure()
         run: |
           if [ -f "build.log" ]; then
-            if grep -q "What went wrong" build.log; then
-              grep -A 12 "What went wrong" build.log | head -n 30 | sed 's/^/::error::/'
+            if grep -Eq "^\* What went wrong:" build.log; then
+              grep -E -A 15 "^\* What went wrong:" build.log | head -n 30 | sed 's/^/::error::/'
             else
               tail -n 30 build.log | sed 's/^/::error::/'
             fi
