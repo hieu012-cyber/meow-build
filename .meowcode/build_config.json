@@ -1,10 +1,6 @@
 {
-  "appName": "Lịch Âm Dương",
-  "apkName": "LichAmDuong-1.0.apk",
-  "versionName": "1.0",
-  "versionCode": 1,
-  "applicationId": "com.meowcode.lichamduong",
-  "minSdk": 21,
-  "targetSdk": 34,
-  "compileSdk": 34
+    "apkName": "LichAmDuong-1.0.apk",
+    "appName": "Lịch Âm Dương",
+    "lastBuildVersion": "1.0.1",
+    "lastBuildCode": 1
 }

@@ -2,7 +2,7 @@
 - Task: làm tiếp đi
 - Status: doing
 - Done:
-  - Đã thực hiện 22 bước thao tác
+  - Đã thực hiện 143 bước thao tác
 - Next: Tiếp tục hoàn thiện mã nguồn
 - Files:
   - settings.gradle
@@ -29,5 +29,5 @@
   - app/src/main/res/drawable/ic_chevron_right.xml
   - app/src/main/res/drawable/bg_button_outline.xml
 - Decisions: Không
-- Blockers: Không
+- Blockers: build_apk tại : [LỖI build_apk] ❌ Build thất bại! (3 lần)
 - Domain: android-app
