@@ -10,7 +10,7 @@
         android:theme="@style/Theme.LichAmDuong">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".data.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize">

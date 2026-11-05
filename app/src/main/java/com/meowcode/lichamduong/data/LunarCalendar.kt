@@ -326,6 +326,25 @@ object LunarCalendar {
         return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 
+    /** Tên tháng âm lịch, ví dụ: Tháng Mười, Tháng Chạp, Tháng Giêng, kèm chữ nhuận */
+    fun lunarMonthName(lunarMonth: Int, isLeap: Boolean): String {
+        val base = when (lunarMonth) {
+            1 -> "Tháng Giêng"
+            2 -> "Tháng Hai"
+            3 -> "Tháng Ba"
+            4 -> "Tháng Tư"
+            5 -> "Tháng Năm"
+            6 -> "Tháng Sáu"
+            7 -> "Tháng Bảy"
+            8 -> "Tháng Tám"
+            9 -> "Tháng Chín"
+            10 -> "Tháng Mười"
+            11 -> "Tháng Mười Một"
+            else -> "Tháng Chạp"
+        }
+        return if (isLeap) "$base (nhuận)" else base
+    }
+
     /** Cộng/trừ tháng, trả về [tháng, năm] */
     fun shiftMonth(month: Int, year: Int, delta: Int): IntArray {
         var total = year * 12 + (month - 1) + delta

@@ -1,9 +1,9 @@
 ### Checkpoint
-- Task: làm tiếp đi
+- Task: nâng giao diện đẹp hơn đi
 - Status: doing
 - Done:
-  - Đã thực hiện 143 bước thao tác
-- Next: Tiếp tục hoàn thiện mã nguồn
+  - Đã xử lý 30 bước
+- Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - settings.gradle
   - build.gradle
@@ -28,6 +28,12 @@
   - app/src/main/res/drawable/ic_chevron_left.xml
   - app/src/main/res/drawable/ic_chevron_right.xml
   - app/src/main/res/drawable/bg_button_outline.xml
-- Decisions: Không
-- Blockers: build_apk tại : [LỖI build_apk] ❌ Build thất bại! (3 lần)
+  - tmp/ids.txt
+  - app/src/main/java/com/meowcode/lichamduong/data/MainActivity.kt
+  - app/src/main/res/drawable/bg_chip.xml
+  - app/src/main/res/drawable/bg_day_selected.xml
+  - app/src/main/res/drawable/bg_day_normal.xml
+  - app/src/main/res/drawable/bg_button_primary.xml
+- Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
+- Blockers: Không
 - Domain: android-app
