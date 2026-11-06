@@ -1,1 +1,6 @@
-{"appName":"Lịch Âm Dương","apkName":"LichAmDuong-v1.0","applicationId":"com.lichamduong.app","versionCode":1,"versionName":"1.0"}
+{
+    "apkName": "LichAmDuong-v1.0",
+    "appName": "Lịch Âm Dương",
+    "lastBuildVersion": "1.0.1",
+    "lastBuildCode": 1
+}

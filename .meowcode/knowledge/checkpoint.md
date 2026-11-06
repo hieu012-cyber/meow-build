@@ -1,8 +1,8 @@
 ### Checkpoint
-- Task: làm 1 app android Lịch âm dương giao diệ
+- Task: giao diện quá xấu
 - Status: doing
 - Done:
-  - Đã xử lý 12 bước
+  - Đã xử lý 7 bước
 - Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - settings.gradle
@@ -21,6 +21,9 @@
   - app/src/main/res/drawable/bg_chip.xml
   - app/src/main/res/layout/activity_main.xml
   - app/src/main/java/com/lichamduong/app/MainActivity.java
+  - app/src/main/res/drawable/bg_cell.xml
+  - app/src/main/res/drawable/bg_selected.xml
+  - app/src/main/res/drawable/bg_gold_btn.xml
 - Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
 - Blockers: Không
 - Domain: android-app
