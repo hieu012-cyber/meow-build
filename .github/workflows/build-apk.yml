@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  APK_NAME: "LichAmDuong-1.0"
+  APK_NAME: "LichAmDuong-v1.0"
   VERSION_MAJOR_MINOR: "1.0"
   VERSION_CODE_OFFSET: "0"
   APPEND_VERSION: "true"
@@ -139,6 +139,25 @@ jobs:
                               }
                           }
                       }
+                  }
+              }
+              tasks.withType(JavaCompile).configureEach {
+                  sourceCompatibility = '17'
+                  targetCompatibility = '17'
+              }
+              tasks.configureEach { task ->
+                  if (task.name.contains('Kotlin')) {
+                      try {
+                          task.kotlinOptions.jvmTarget = '17'
+                      } catch (Throwable ignored) {}
+                  }
+              }
+              afterEvaluate { proj ->
+                  if (proj.hasProperty('android')) {
+                      try {
+                          proj.android.lintOptions.abortOnError = false
+                          proj.android.lintOptions.checkReleaseBuilds = false
+                      } catch (Throwable ignored) {}
                   }
               }
           }

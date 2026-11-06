@@ -1,2 +1,0 @@
-@color/values/colors.xml:8:white"
-@color/values/colors.xml:9:divider"

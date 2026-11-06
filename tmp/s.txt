@@ -1,5 +1,0 @@
-layout/activity_main.xml:275:@string/note_title
-layout/activity_main.xml:286:@string/note_hint
-layout/activity_main.xml:45:@string/prev_month
-layout/activity_main.xml:79:@string/next_month
-layout/activity_main.xml:99:@string/today

@@ -1,39 +1,26 @@
 ### Checkpoint
-- Task: nâng giao diện đẹp hơn đi
+- Task: làm 1 app android Lịch âm dương giao diệ
 - Status: doing
 - Done:
-  - Đã xử lý 30 bước
+  - Đã xử lý 12 bước
 - Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - settings.gradle
   - build.gradle
   - gradle.properties
   - app/build.gradle
-  - gradle/wrapper/gradle-wrapper.properties
-  - app/proguard-rules.pro
   - app/src/main/AndroidManifest.xml
   - .meowcode/build_config.json
-  - app/src/main/java/com/meowcode/lichamduong/data/LunarCalendar.kt
   - app/src/main/res/values/colors.xml
   - app/src/main/res/values/strings.xml
   - app/src/main/res/values/themes.xml
-  - app/src/main/res/drawable/ic_launcher_foreground.xml
-  - app/src/main/res/mipmap/ic_launcher.xml
-  - app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
-  - app/src/main/res/layout/activity_main.xml
+  - app/src/main/java/com/lichamduong/app/LunarCalendar.java
   - app/src/main/res/drawable/bg_header.xml
   - app/src/main/res/drawable/bg_card.xml
-  - app/src/main/res/drawable/bg_nav_button.xml
   - app/src/main/res/drawable/bg_today.xml
-  - app/src/main/res/drawable/ic_chevron_left.xml
-  - app/src/main/res/drawable/ic_chevron_right.xml
-  - app/src/main/res/drawable/bg_button_outline.xml
-  - tmp/ids.txt
-  - app/src/main/java/com/meowcode/lichamduong/data/MainActivity.kt
   - app/src/main/res/drawable/bg_chip.xml
-  - app/src/main/res/drawable/bg_day_selected.xml
-  - app/src/main/res/drawable/bg_day_normal.xml
-  - app/src/main/res/drawable/bg_button_primary.xml
+  - app/src/main/res/layout/activity_main.xml
+  - app/src/main/java/com/lichamduong/app/MainActivity.java
 - Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
 - Blockers: Không
 - Domain: android-app
