@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
   String[] w={"CN","T2","T3","T4","T5","T6","T7"};
   for(int i=0;i<7;i++){TextView t=new TextView(this);t.setText(w[i]);t.setGravity(Gravity.CENTER);t.setTextSize(11);t.setTypeface(null,Typeface.BOLD);t.setTextColor(i==0?Color.parseColor("#D11A38"):Color.parseColor("#9B8B8E"));GridLayout.LayoutParams p=new GridLayout.LayoutParams();p.width=0;p.columnSpec=GridLayout.spec(i,1f);t.setLayoutParams(p);gridWeek.addView(t);}
   // Lưới ngày
-  gridCal.removeAllViews();
-  Calendar c=(Calendar)current.clone(); c.set(Calendar.DAY_OF_MONTH,1);
+ gridCal.removeAllViews();
+ gridCal.setAlpha(0f); gridCal.animate().alpha(1f).setDuration(450).start();
   int startDow=c.get(Calendar.DAY_OF_WEEK)-1; int max=c.getActualMaximum(Calendar.DAY_OF_MONTH);
   Calendar today=Calendar.getInstance();
   for(int i=0;i<startDow;i++){Space s=new Space(this);GridLayout.LayoutParams p=new GridLayout.LayoutParams();p.width=0;p.height=300;p.columnSpec=GridLayout.spec(GridLayout.UNDEFINED,1f);s.setLayoutParams(p);gridCal.addView(s);}

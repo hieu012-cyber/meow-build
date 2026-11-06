@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/cream" android:fillViewport="true">
- <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
-  <LinearLayout android:background="@drawable/bg_header" android:orientation="vertical" android:padding="22dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-   <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-    <TextView android:text="LỊCH VẠN NIÊN" android:textSize="12sp" android:textColor="@color/gold_light" android:letterSpacing="0.25" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" />
-    <TextView android:id="@+id/tvCanChiMonth" android:textSize="12sp" android:textColor="#FFFFFF" android:background="@drawable/bg_chip" android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="6dp" android:paddingBottom="6dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+ <com.lichamduong.app.AnimatedBackgroundView android:layout_width="match_parent" android:layout_height="match_parent" />
+ <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:background="#00000000" android:fillViewport="true">
+  <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+   <LinearLayout android:background="@drawable/bg_header" android:orientation="vertical" android:padding="22dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <LinearLayout android:orientation="horizontal" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+     <TextView android:text="LICH VAN NIEN  •  NEN DONG" android:textSize="12sp" android:textColor="@color/gold_light" android:letterSpacing="0.25" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content" />
+     <TextView android:id="@+id/tvCanChiMonth" android:textSize="12sp" android:textColor="#FFFFFF" android:background="@drawable/bg_chip" android:paddingLeft="12dp" android:paddingRight="12dp" android:paddingTop="6dp" android:paddingBottom="6dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_marginTop="14dp" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+     <LinearLayout android:orientation="vertical" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content">
+      <TextView android:id="@+id/tvMonthYear" android:textSize="26sp" android:textStyle="bold" android:textColor="#FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+      <TextView android:id="@+id/tvLunarMonth" android:textSize="13sp" android:textColor="@color/gold_light" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+     </LinearLayout>
+     <TextView android:id="@+id/btnPrev" android:text="‹" android:textSize="28sp" android:textColor="@color/gold" android:background="@drawable/bg_chip" android:gravity="center" android:layout_width="44dp" android:layout_height="44dp" />
+     <TextView android:id="@+id/btnToday" android:text="Hom nay" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/ink" android:background="@drawable/bg_gold_btn" android:gravity="center" android:layout_marginLeft="8dp" android:layout_marginRight="8dp" android:paddingLeft="14dp" android:paddingRight="14dp" android:layout_width="wrap_content" android:layout_height="38dp" />
+     <TextView android:id="@+id/btnNext" android:text="›" android:textSize="28sp" android:textColor="@color/gold" android:background="@drawable/bg_chip" android:gravity="center" android:layout_width="44dp" android:layout_height="44dp" />
+    </LinearLayout>
+    <LinearLayout android:background="@drawable/bg_chip" android:orientation="horizontal" android:padding="14dp" android:layout_marginTop="16dp" android:gravity="center_vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+     <LinearLayout android:orientation="vertical" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content">
+      <TextView android:id="@+id/tvTodaySolar" android:textSize="34sp" android:textStyle="bold" android:textColor="#FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+      <TextView android:id="@+id/tvTodayDow" android:textSize="12sp" android:textColor="@color/gold_light" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+     </LinearLayout>
+     <LinearLayout android:orientation="vertical" android:gravity="end" android:layout_width="wrap_content" android:layout_height="wrap_content">
+      <TextView android:id="@+id/tvTodayLunar" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/gold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+      <TextView android:id="@+id/tvTodayCanChi" android:textSize="11sp" android:textColor="#FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+     </LinearLayout>
+    </LinearLayout>
    </LinearLayout>
-   <LinearLayout android:orientation="horizontal" android:layout_marginTop="14dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-    <LinearLayout android:orientation="vertical" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content">
-     <TextView android:id="@+id/tvMonthYear" android:textSize="26sp" android:textStyle="bold" android:textColor="#FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-     <TextView android:id="@+id/tvLunarMonth" android:textSize="13sp" android:textColor="@color/gold_light" android:layout_marginTop="2dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    </LinearLayout>
-    <TextView android:id="@+id/btnPrev" android:text="‹" android:textSize="28sp" android:textColor="@color/gold" android:background="@drawable/bg_chip" android:gravity="center" android:width="44dp" android:height="44dp" android:layout_width="44dp" android:layout_height="44dp" />
-    <TextView android:id="@+id/btnToday" android:text="Hôm nay" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/ink" android:background="@drawable/bg_gold_btn" android:gravity="center" android:layout_marginLeft="8dp" android:layout_marginRight="8dp" android:paddingLeft="14dp" android:paddingRight="14dp" android:height="38dp" android:layout_width="wrap_content" android:layout_height="38dp" />
-    <TextView android:id="@+id/btnNext" android:text="›" android:textSize="28sp" android:textColor="@color/gold" android:background="@drawable/bg_chip" android:gravity="center" android:width="44dp" android:height="44dp" android:layout_width="44dp" android:layout_height="44dp" />
-   </LinearLayout>
-   <LinearLayout android:id="@+id/todayCard" android:orientation="horizontal" android:background="@drawable/bg_chip" android:padding="14dp" android:layout_marginTop="16dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
-    <LinearLayout android:orientation="vertical" android:layout_weight="1" android:layout_width="0dp" android:layout_height="wrap_content">
-     <TextView android:id="@+id/tvTodaySolar" android:textSize="34sp" android:textStyle="bold" android:textColor="#FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-     <TextView android:id="@+id/tvTodayDow" android:textSize="12sp" android:textColor="@color/gold_light" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout android:orientation="vertical" android:gravity="end" android:layout_width="wrap_content" android:layout_height="wrap_content">
-     <TextView android:id="@+id/tvTodayLunar" android:textSize="15sp" android:textStyle="bold" android:textColor="@color/gold" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-     <TextView android:id="@+id/tvTodayCanChi" android:textSize="11sp" android:textColor="#FFFFFF" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-    </LinearLayout>
+   <GridLayout android:id="@+id/gridWeek" android:columnCount="7" android:layout_marginLeft="14dp" android:layout_marginRight="14dp" android:layout_marginTop="14dp" android:background="#CCFFFFFF" android:paddingTop="8dp" android:paddingBottom="8dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
+   <GridLayout android:id="@+id/gridCal" android:columnCount="7" android:layout_margin="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
+   <LinearLayout android:background="@drawable/bg_card" android:orientation="vertical" android:padding="18dp" android:elevation="4dp" android:layout_margin="14dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <TextView android:text="NGAY DUOC CHON" android:textSize="11sp" android:textColor="@color/muted" android:letterSpacing="0.2" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <TextView android:id="@+id/tvSelected" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/ink" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+    <View android:background="#F2C14E" android:layout_marginTop="10dp" android:layout_width="44dp" android:layout_height="3dp" />
+    <TextView android:id="@+id/tvDetail" android:textSize="14sp" android:textColor="#4A3A3E" android:lineSpacingExtra="4dp" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
+    <TextView android:id="@+id/tvQuote" android:textSize="13sp" android:textStyle="italic" android:textColor="@color/muted" android:layout_marginTop="12dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
    </LinearLayout>
   </LinearLayout>
-  <GridLayout android:id="@+id/gridWeek" android:columnCount="7" android:layout_marginLeft="14dp" android:layout_marginRight="14dp" android:layout_marginTop="14dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
-  <GridLayout android:id="@+id/gridCal" android:columnCount="7" android:useDefaultMargins="false" android:layout_margin="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
-  <LinearLayout android:background="@drawable/bg_card" android:orientation="vertical" android:padding="18dp" android:elevation="4dp" android:layout_margin="14dp" android:layout_width="match_parent" android:layout_height="wrap_content">
-   <TextView android:text="NGÀY ĐƯỢC CHỌN" android:textSize="11sp" android:textColor="@color/muted" android:letterSpacing="0.2" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-   <TextView android:id="@+id/tvSelected" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/ink" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content" />
-   <View android:background="#F2C14E" android:layout_marginTop="10dp" android:layout_width="44dp" android:layout_height="3dp" />
-   <TextView android:id="@+id/tvDetail" android:textSize="14sp" android:textColor="#4A3A3E" android:lineSpacingExtra="4dp" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
-   <TextView android:id="@+id/tvQuote" android:textSize="13sp" android:textStyle="italic" android:textColor="@color/muted" android:layout_marginTop="12dp" android:layout_width="match_parent" android:layout_height="wrap_content" />
-  </LinearLayout>
- </LinearLayout>
-</ScrollView>
+ </ScrollView>
+</FrameLayout>

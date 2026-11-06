@@ -1,8 +1,8 @@
 ### Checkpoint
-- Task: giao diện quá xấu
+- Task: thêm đi
 - Status: doing
 - Done:
-  - Đã xử lý 7 bước
+  - Đã xử lý 2 bước
 - Next: Rút gọn bộ nhớ và thực hiện tiếp
 - Files:
   - settings.gradle
@@ -24,6 +24,7 @@
   - app/src/main/res/drawable/bg_cell.xml
   - app/src/main/res/drawable/bg_selected.xml
   - app/src/main/res/drawable/bg_gold_btn.xml
+  - app/src/main/java/com/lichamduong/app/AnimatedBackgroundView.java
 - Decisions: Kích hoạt Checkpoint sớm do ngữ cảnh đạt ngưỡng an toàn
 - Blockers: Không
 - Domain: android-app
